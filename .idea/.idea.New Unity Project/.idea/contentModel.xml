@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Bfedorowytsch\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Bfedorowytsch\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_New Unity Project.-940856909.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Bfedorowytsch\Downloads\TestGame\New Unity Project" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="CameraControlFirstPerson.cs" t="Include" />
+          <e p="Cube_States" t="Include">
+            <e p="Charge.cs" t="Include" />
+            <e p="Idle.cs" t="Include" />
+            <e p="Jump.cs" t="Include" />
+            <e p="WeirdFloating.cs" t="Include" />
+          </e>
+          <e p="CubesStateManager.cs" t="Include" />
+          <e p="ExtensionMethods.cs" t="Include" />
+          <e p="PlayerMovement.cs" t="Include" />
+          <e p="PlayerStateManager.cs" t="Include" />
+          <e p="StateBase.cs" t="Include" />
+          <e p="StateManager.cs" t="Include" />
+        </e>
+      </e>
+      <e p="New Unity Project.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
