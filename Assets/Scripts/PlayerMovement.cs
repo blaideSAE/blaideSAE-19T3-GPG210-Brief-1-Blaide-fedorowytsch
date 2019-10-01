@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float friction;
     public float maxSpeed;
 
+    private Vector3 Velocity;
     private Vector3 moveDir;
     public float jumpForce;
 
@@ -26,38 +27,27 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        if (Mathf.Abs(Input.GetAxis("Vertical")) >= inputFilter &&  charCtrlr.velocity.magnitude < maxSpeed)
+            moveDir.z = Input.GetAxis("Vertical");
+            moveDir.x = Input.GetAxis("Horizontal");
+            moveDir = transform.rotation * moveDir;
+            Velocity += moveDir * (charCtrlr.isGrounded? 1:0.5f)* speed * Time.deltaTime;
+            
+        if(charCtrlr.isGrounded)
         {
-            moveDir.z +=  Input.GetAxis("Vertical") * speed * Time.deltaTime;
+            Velocity.x -= Velocity.normalized.x * Time.deltaTime *1;
+            Velocity.z -= Velocity.normalized.z *Time.deltaTime *1;
         }
-        else if (charCtrlr.isGrounded && (moveDir.z > 0.001 || moveDir.z < -0.001))
-        {
-            moveDir.z -= moveDir.z * friction * Time.deltaTime;
-        }
-
-
-        if (Mathf.Abs(Input.GetAxis("Horizontal")) >= inputFilter &&  charCtrlr.velocity.magnitude < maxSpeed)
-        {
-            moveDir.x += speed * Input.GetAxis("Horizontal") * Time.deltaTime;
-        }
-        else if ( charCtrlr.isGrounded && (moveDir.x > 0.001 || moveDir.x < -0.001))
-        {
-            moveDir.x -= moveDir.x * friction  * Time.deltaTime;
-        }
-
+        
 
         if (Input.GetKeyDown(KeyCode.Space) && charCtrlr.isGrounded)
         {
-            moveDir.y = jumpForce;
+            Velocity.y = jumpForce;
         }
         else if (!charCtrlr.isGrounded)
         {
-           moveDir.y += -0.5f * Time.deltaTime; 
+           Velocity.y += -0.5f * Time.deltaTime; 
         }
 
-        
-        
-        charCtrlr.Move(transform.rotation *moveDir);
-        
+        charCtrlr.Move(Velocity);
     }
 }
