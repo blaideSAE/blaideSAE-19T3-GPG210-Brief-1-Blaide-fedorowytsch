@@ -17,13 +17,18 @@ public class Idle : StateBase
 
     public override void Execute()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            sM.ChangeState(nextState);
-        }
+
     }
     public override void Exit()
     {
     
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<PlayerMovement>())
+        {
+            sM.ChangeState(nextState);
+        }
+        //throw new NotImplementedException();
     }
 }

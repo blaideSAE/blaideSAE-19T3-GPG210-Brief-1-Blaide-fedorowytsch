@@ -12,8 +12,8 @@ public class FrontRingAnimation : MonoBehaviour
     public bool pulsateEnabled;
     public float pulseSpeed;
     public float pulseScale;
-    public float curScale;
-    public float minScale;
+    public float currentScale;
+    public float minimumScale;
     
     // Start is called before the first frame update
     void Start()
@@ -43,7 +43,7 @@ public class FrontRingAnimation : MonoBehaviour
 
     void Pulsate()
     {
-        curScale = Mathf.PerlinNoise(0.1f, Time.time * pulseSpeed)*pulseScale +minScale;
-        transform.localScale = new Vector3(curScale,curScale,curScale);
+        currentScale = Mathf.PerlinNoise(0.1f, Time.time * pulseSpeed)*pulseScale +minimumScale;
+        transform.localScale = new Vector3(currentScale,currentScale,currentScale);
     }
 }

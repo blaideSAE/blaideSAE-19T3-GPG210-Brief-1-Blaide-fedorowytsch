@@ -35,11 +35,10 @@ public class CameraControlFirstPerson : MonoBehaviour
     void RotateCamera()
     {
         camAngle = cameraGameObj.transform.rotation.eulerAngles; //Get the actual angle, 
-        //camAngle.x = camAngle.x % 360; // This just takes any numbers outside of 0 - 360 and converts them to a number between 0-360.
-        
         mouseX = Input.GetAxis("Mouse X"); // This is actually the horizontal axis
         mouseY = Input.GetAxis("Mouse Y") *(invertYAxis? -1: 1); // this is the vertical axis
 
+        
         // filtering so there is no jitter.. I know the input system probably could take care of this, But im doing it here instead.
         if (Mathf.Abs(mouseX) >= inputFilter)
         {
@@ -63,7 +62,7 @@ public class CameraControlFirstPerson : MonoBehaviour
         camAngle = cameraGameObj.transform.rotation.eulerAngles;
         camAngle.x += deltaY;
         camAngle.y += deltaX;
-        camAngle.x = camAngle.x % 360;
+        camAngle.x = camAngle.x % 360; // This just takes any numbers outside of 0 - 360 and converts them to a number between 0-360.
         
         // camera angle can not rotate to completely vertical  because weird stuff happens... because im not rotating the z axis at all.
         if (camAngle.x > 70 && camAngle.x < 180)
@@ -74,6 +73,8 @@ public class CameraControlFirstPerson : MonoBehaviour
         {
             camAngle.x = 278;
         }
+        
+        
         transform.rotation = Quaternion.Euler(0,camAngle.y,0);
         cameraGameObj.transform.rotation = Quaternion.Euler(camAngle.x,camAngle.y,0); 
     }

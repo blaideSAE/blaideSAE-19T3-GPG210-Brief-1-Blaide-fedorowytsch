@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateManager : StateManager
+public class NoObjectHeld : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,10 +14,5 @@ public class PlayerStateManager : StateManager
     void Update()
     {
         
-    }
-
-    public override void ChangeState(StateBase state)
-    {
-     
     }
 }
