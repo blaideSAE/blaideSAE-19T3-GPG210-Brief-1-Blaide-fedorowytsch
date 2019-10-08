@@ -24,7 +24,11 @@
         <e p="Scripts" t="Include">
           <e p="CameraControlFirstPerson.cs" t="Include" />
           <e p="Cube" t="Include">
+<<<<<<< HEAD
             <e p="ObjectFocus.cs" t="Include" />
+=======
+            <e p="OutlineController.cs" t="Include" />
+>>>>>>> master
             <e p="States" t="Include">
               <e p="Charge.cs" t="Include" />
               <e p="Idle.cs" t="Include" />
@@ -34,6 +38,7 @@
           </e>
           <e p="ExtensionMethods.cs" t="Include" />
           <e p="ForceGun" t="Include">
+            <e p="ForceGunMain.cs" t="Include" />
             <e p="FrontRingAnimation.cs" t="Include" />
             <e p="States" t="Include">
               <e p="NoObjectHeld.cs" t="Include" />

@@ -49949,9 +49949,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1965531209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce3e77a8c50b6584b871c04f047c52a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 965a84e1057c7784ca28a3079547f5b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedObject: {fileID: 0}
+  selectedIsHeld: {fileID: 0}
 --- !u!114 &1965531216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49966,7 +49968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraGameObj: {fileID: 963194225}
   playerCamera: {fileID: 963194227}
-  inputFilter: 0.09
+  inputFilter: 0
   rotationSpeed: 218.09
   invertYAxis: 1
 --- !u!1 &1974649250
