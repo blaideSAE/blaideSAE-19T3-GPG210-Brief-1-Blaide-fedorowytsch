@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoObjectHeld : StateBase
+public class ForceGunMain : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    public GameObject selectedObject;
+    public GameObject selectedIsHeld;
+    
+    
+    
     void Start()
     {
         
@@ -15,4 +21,8 @@ public class NoObjectHeld : StateBase
     {
         
     }
+    
+    void Checkfor
+    
 }
+
