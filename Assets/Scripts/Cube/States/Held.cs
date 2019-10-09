@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Charge : StateBase
+public class Held : StateBase
 {
-    
+    void Start()
+    {
+
+    }
     public override void Enter()
     {
         
@@ -12,11 +15,22 @@ public class Charge : StateBase
 
     public override void Execute()
     {
-        
+
+    }
+
+    public void Dropped()
+    {
+        sM.ChangeState(nextState);
+    }
+
+    public void Thrown()
+    {
+        sM.ChangeState(nextState);
     }
 
     public override void Exit()
     {
-        
+    
     }
-}
+
+ }

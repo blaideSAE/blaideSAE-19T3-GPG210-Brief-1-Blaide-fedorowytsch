@@ -4,9 +4,24 @@
     <e p="C:\Users\Bfedorowytsch\.Rider2019.2\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\Bfedorowytsch\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_blaideSAE-19T3-GPG210-Brief-1-Blaide-fedorowytsch.1870700458.00" t="ExcludeRecursive" />
     <e p="C:\Users\Bfedorowytsch\Documents\blaideSAE-19T3-GPG210-Brief-1-Blaide-fedorowytsch" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Demigiant" t="Include">
+          <e p="DOTween" t="Include">
+            <e p="Modules" t="Include">
+              <e p="DOTweenModuleAudio.cs" t="Include" />
+              <e p="DOTweenModulePhysics.cs" t="Include" />
+              <e p="DOTweenModulePhysics2D.cs" t="Include" />
+              <e p="DOTweenModuleSprite.cs" t="Include" />
+              <e p="DOTweenModuleUI.cs" t="Include" />
+              <e p="DOTweenModuleUnityVersion.cs" t="Include" />
+              <e p="DOTweenModuleUtils.cs" t="Include" />
+            </e>
+            <e p="Readme.txt" t="Include" />
+          </e>
+        </e>
         <e p="Plugins" t="Include">
           <e p="QuickOutline" t="Include">
             <e p="Readme.txt" t="Include" />
@@ -20,14 +35,42 @@
               <e p="Outline.cs" t="Include" />
             </e>
           </e>
+          <e p="Sirenix" t="Include">
+            <e p="Assemblies" t="Include">
+              <e p="link.xml" t="Include" />
+              <e p="Sirenix.OdinInspector.Attributes.xml" t="Include" />
+              <e p="Sirenix.OdinInspector.Editor.xml" t="Include" />
+              <e p="Sirenix.Serialization.Config.xml" t="Include" />
+              <e p="Sirenix.Utilities.Editor.xml" t="Include" />
+              <e p="Sirenix.Utilities.xml" t="Include" />
+            </e>
+            <e p="Odin Inspector" t="Include">
+              <e p="Scripts" t="Include">
+                <e p="Editor" t="Include">
+                  <e p="AssemblyImportSettingsAutomation.cs" t="Include" />
+                  <e p="BuildAOTAutomation.cs" t="Include" />
+                  <e p="EnsureOdinInspectorDefine.cs" t="Include" />
+                  <e p="FixBrokenUnityObjectWrapperDrawer.cs" t="Include" />
+                  <e p="SyncListDrawer.cs" t="Include" />
+                  <e p="SyncVarAttributeDrawer.cs" t="Include" />
+                  <e p="Vector2IntMinMaxAttributeDrawer.cs" t="Include" />
+                  <e p="VectorIntDrawers.cs" t="Include" />
+                  <e p="VectorIntPropertyResolvers.cs" t="Include" />
+                </e>
+                <e p="SerializedNetworkBehaviour.cs" t="Include" />
+                <e p="VectorIntFormatters.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Readme.txt" t="Include" />
+          </e>
         </e>
         <e p="Scripts" t="Include">
           <e p="CameraControlFirstPerson.cs" t="Include" />
           <e p="Cube" t="Include">
             <e p="ObjectFocus.cs" t="Include" />
-            <e p="OutlineController.cs" t="Include" />
             <e p="States" t="Include">
-              <e p="Charge.cs" t="Include" />
+              <e p="Frozen.cs" t="Include" />
+              <e p="Held.cs" t="Include" />
               <e p="Idle.cs" t="Include" />
               <e p="Jump.cs" t="Include" />
               <e p="WeirdFloating.cs" t="Include" />
@@ -38,9 +81,11 @@
             <e p="ForceGunMain.cs" t="Include" />
             <e p="FrontRingAnimation.cs" t="Include" />
             <e p="States" t="Include">
+              <e p="BasicHold.cs" t="Include" />
               <e p="NoObjectHeld.cs" t="Include" />
             </e>
           </e>
+          <e p="NewBehaviourScript.cs" t="Include" />
           <e p="PlayerMovement.cs" t="Include" />
           <e p="StateBase.cs" t="Include" />
           <e p="StateManager.cs" t="Include" />
