@@ -54,12 +54,6 @@ ExportedObj/
 # Unity3D generated file on crash reports
 sysinfo.txt
 
-# Rider
-.idea/
-Assets/Plugins/Editor/JetBrains/
-Assets/Plugins/Editor/JetBrains.meta
-
-
 # Builds
 *.apk
 *.unitypackage
