@@ -5,8 +5,8 @@ using UnityEngine;
 public class NoObjectHeld : StateBase
 {
     public float maxDistance;
-    //private GameObject lastFocused;
-    private GameObject currentFocused;
+    public GameObject lastFocused;
+    public GameObject currentFocused;
     void Start()
     {
         
@@ -25,23 +25,49 @@ public class NoObjectHeld : StateBase
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask))
         {
             //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            currentFocused = hit.collider.gameObject;
-            ObjectFocus focusScript = currentFocused.GetComponent<ObjectFocus>();
-            if (focusScript != null)
-            {
-                focusScript.GotFocus();
-            }
-
+           // if (hit.collider.gameObject.GetComponent<Outline>() != null)
+           // {
+              currentFocused = hit.collider.gameObject;  
+           // }
         }
         else
         {
             //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+            currentFocused = null;
+            if (lastFocused != null)
+            {
+                if (lastFocused != currentFocused && lastFocused.GetComponent<Outline>() != null) 
+                {
+                    lastFocused.GetComponent<Outline>().enabled = false;
+                }
+            }
+            
         }
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Use();
         }
+
+        if (  currentFocused != null)
+        {
+           if (lastFocused != null)
+           {
+               if (lastFocused != currentFocused && lastFocused.GetComponent<Outline>() != null) 
+               {
+                   lastFocused.GetComponent<Outline>().enabled = false;
+               }
+           }
+
+           if (currentFocused.GetComponent<Outline>() != null)
+           {
+                          currentFocused.GetComponent<Outline>().enabled = true;
+
+           }
+           lastFocused = currentFocused;
+        }
+
+        
 
     }
 

@@ -22,7 +22,7 @@ public class ForceGunMain : MonoBehaviour
         
     }
     
-    void Checkfor
+    //void Checkfor
     
 }
 

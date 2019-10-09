@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float friction;
     public float maxSpeed;
 
-    private Vector3 Velocity;
+    private Vector3 velocity;
     private Vector3 moveDir;
     public float jumpForce;
 
@@ -26,28 +26,27 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
             moveDir.z = Input.GetAxis("Vertical");
             moveDir.x = Input.GetAxis("Horizontal");
             moveDir = transform.rotation * moveDir;
-            Velocity += moveDir * (charCtrlr.isGrounded? 1:0.5f)* speed * Time.deltaTime;
+            velocity += moveDir * (charCtrlr.isGrounded? 1:0.5f)* speed * Time.deltaTime;
             
         if(charCtrlr.isGrounded)
         {
-            Velocity.x -= Velocity.normalized.x * Time.deltaTime *1;
-            Velocity.z -= Velocity.normalized.z *Time.deltaTime *1;
+            velocity.x -= velocity.normalized.x * Time.deltaTime *1;
+            velocity.z -= velocity.normalized.z *Time.deltaTime *1;
         }
         
 
         if (Input.GetKeyDown(KeyCode.Space) && charCtrlr.isGrounded)
         {
-            Velocity.y = jumpForce;
+            velocity.y = jumpForce;
         }
         else if (!charCtrlr.isGrounded)
         {
-           Velocity.y += -0.5f * Time.deltaTime; 
+           velocity.y += -0.5f * Time.deltaTime; 
         }
 
-        charCtrlr.Move(Velocity);
+        charCtrlr.Move(velocity);
     }
 }
