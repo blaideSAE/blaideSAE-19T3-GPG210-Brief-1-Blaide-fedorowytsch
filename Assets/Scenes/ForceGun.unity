@@ -19591,11 +19591,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sM: {fileID: 392248618}
   nextState: {fileID: 392248617}
-  target: {fileID: 357172504}
-  holdingForce: 29.49
+  target: {fileID: 357172503}
+  holdingForce: 300
   rotationalFriction: 0.67
   heldObject: {fileID: 0}
-  newDrag: 0.8
+  newDrag: 15
 --- !u!1 &430108939
 GameObject:
   m_ObjectHideFlags: 0

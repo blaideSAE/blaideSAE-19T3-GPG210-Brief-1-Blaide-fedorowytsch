@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BasicHold : StateBase
 {
-    public Transform target;
+    public GameObject target;
     //public Vector3 velocity;
     public float holdingForce;
     public float rotationalFriction;
@@ -27,21 +27,26 @@ public class BasicHold : StateBase
 
     public override void Execute()
     {
-        distance = Vector3.Distance(target.position, heldObject.transform.position);
+        distance = Vector3.Distance(target.transform.position, heldObject.transform.position);
         
         HoldPosition();
-        heldObjectRB.drag =  0.3f + newDrag * 1/Mathf.Pow(distance,2);
+        heldObjectRB.drag =  0.5f +   1/distance + newDrag * 1/Mathf.Pow(distance,2);
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Use();
+        }
+
+        if ( Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) >= 0.01f)
+        {
+            target.transform.position += target.transform.forward * Input.GetAxis("Mouse ScrollWheel") * 5;
         }
     }
 
     public void HoldPosition()
     {
         //heldObjectRB.AddForce(;
-        heldObjectRB.AddForce((target.position - heldObject.transform.position) * holdingForce * distance *Time.deltaTime );
+        heldObjectRB.AddForce(Vector3.Normalize(target.transform.position - heldObject.transform.position) * (distance * holdingForce + holdingForce * Mathf.Log10(distance)));// *Time.deltaTime );
     }
 
     private void Use()
