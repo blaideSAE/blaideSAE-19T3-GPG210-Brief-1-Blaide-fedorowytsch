@@ -46,7 +46,7 @@ public class NoObjectHeld : StateBase
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Use();
+            Fire();
         }
 
         if (  currentFocused != null)
@@ -68,7 +68,7 @@ public class NoObjectHeld : StateBase
         }
     }
 
-    private void Use()
+    private void Fire()
     {
         if (currentFocused.GetComponent<Outline>() != null)
         {

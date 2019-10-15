@@ -34,7 +34,7 @@ public class BasicHold : StateBase
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Use();
+            Fire();
         }
 
         if ( Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) >= 0.01f)
@@ -49,7 +49,7 @@ public class BasicHold : StateBase
         heldObjectRB.AddForce(Vector3.Normalize(target.transform.position - heldObject.transform.position) * (distance * holdingForce + holdingForce * Mathf.Log10(distance)));// *Time.deltaTime );
     }
 
-    private void Use()
+    private void Fire()
     {
         heldObjectRB.drag = oldDrag;
         heldObjectRB.useGravity = true;
