@@ -6,15 +6,15 @@ public class BasicHold : StateBase
 {
     public GameObject target;
     //public Vector3 velocity;
-    public float holdingForce;
-    public float rotationalFriction;
     
+    public AnimationCurve holdCurve;
     public GameObject heldObject;
     private Rigidbody heldObjectRB;
     private StateManager heldStateManager;
     private float oldDrag;
     public float newDrag;
     private float distance;
+    //private Quaternion heldObjectTargetRotation;
     public override void Enter()
     {
         
@@ -22,6 +22,9 @@ public class BasicHold : StateBase
         heldStateManager = heldObject.GetComponent<StateManager>();
         heldObjectRB.useGravity = false;
         oldDrag = heldObjectRB.drag;
+        target.transform.rotation = heldObject.transform.rotation;
+        target.transform.position = heldObject.transform.position;
+
 
     }
 
@@ -39,14 +42,19 @@ public class BasicHold : StateBase
 
         if ( Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) >= 0.01f)
         {
-            target.transform.position += target.transform.forward * Input.GetAxis("Mouse ScrollWheel") * 5;
+            Vector3 targetNewPos = target.transform.position + (target.transform.position-this.transform.position).normalized  * Input.GetAxis("Mouse ScrollWheel") * 5;
+            if (Vector3.Distance(targetNewPos, this.transform.position) >= 2 && Vector3.Distance(targetNewPos, this.transform.position) <= 14)
+            {
+                target.transform.position += (target.transform.position-this.transform.position).normalized * Input.GetAxis("Mouse ScrollWheel") * 5;
+            }
+
         }
     }
 
     public void HoldPosition()
     {
         //heldObjectRB.AddForce(;
-        heldObjectRB.AddForce(Vector3.Normalize(target.transform.position - heldObject.transform.position) * (distance * holdingForce + holdingForce * Mathf.Log10(distance)));// *Time.deltaTime );
+        heldObjectRB.AddForce(Vector3.Normalize(target.transform.position - heldObject.transform.position) * holdCurve.Evaluate(distance) * heldObjectRB.mass) ;// (distance * holdingForce + holdingForce * Mathf.Log10(distance)));// *Time.deltaTime );
     }
 
     private void Fire()
@@ -59,6 +67,5 @@ public class BasicHold : StateBase
 
     public override void Exit()
     {
-    
     }
 }
