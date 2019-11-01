@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoObjectHeld : StateBase
+public class NoObjectHeld : StateBase, IGrabber<IGrabbable>
 {
     public float maxDistance;
     public GameObject lastFocused;
     public GameObject currentFocused;
+    public BasicHold basicHold;
     void Start()
     {
-        
+        basicHold = gameObject.GetComponent<BasicHold>();
     }
     public override void Enter()
     {
@@ -18,8 +19,8 @@ public class NoObjectHeld : StateBase
 
     public override void Execute()
     {
-        int layerMask = 1 << 8;
-        layerMask = ~layerMask;
+        int layerMask = 1 << 2;
+       layerMask = ~layerMask;
         RaycastHit hit;
         
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask))
@@ -70,14 +71,28 @@ public class NoObjectHeld : StateBase
 
     private void Fire()
     {
-        if (currentFocused.GetComponent<Outline>() != null)
+        if(currentFocused.GetComponent<IGrabbable>() != null)
         {
-            currentFocused.GetComponent<StateManager>().ChangeState(currentFocused.GetComponent<Held>());
-            GetComponent<BasicHold>().heldObject = currentFocused.gameObject;
-               // (BasicHold)nextState.h
-            sM.ChangeState(nextState);
+           Grab(currentFocused.GetComponent<IGrabbable>());
+
         }
 
+    }
+
+    public void Grab(IGrabbable grabbable)
+    {
+        grabbable.Grabbed();
+        if (currentFocused.GetComponent<Rigidbody>() != null)
+        {
+            basicHold.heldObject = currentFocused.gameObject;
+            sM.ChangeState(nextState); 
+        }
+
+    }
+
+    public void Drop(IGrabbable grabbable)
+    {
+        grabbable.Dropped();
     }
 
     public override void Exit()

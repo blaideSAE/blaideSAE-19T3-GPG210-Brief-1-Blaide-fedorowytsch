@@ -65,9 +65,9 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="BuildingBlock.cs" t="Include" />
           <e p="CameraControlFirstPerson.cs" t="Include" />
           <e p="Cube" t="Include">
-            <e p="ObjectFocus.cs" t="Include" />
             <e p="States" t="Include">
               <e p="Frozen.cs" t="Include" />
               <e p="Held.cs" t="Include" />
@@ -76,6 +76,7 @@
               <e p="WeirdFloating.cs" t="Include" />
             </e>
           </e>
+          <e p="CubeSpawner.cs" t="Include" />
           <e p="ExtensionMethods.cs" t="Include" />
           <e p="ForceGun" t="Include">
             <e p="ForceGunMain.cs" t="Include" />
@@ -85,6 +86,10 @@
               <e p="NoObjectHeld.cs" t="Include" />
             </e>
           </e>
+          <e p="GlueBall.cs" t="Include" />
+          <e p="GravClamp.cs" t="Include" />
+          <e p="IGrabbable.cs" t="Include" />
+          <e p="IGrabber.cs" t="Include" />
           <e p="PlayerInteraction.cs" t="Include" />
           <e p="PlayerMovement.cs" t="Include" />
           <e p="Spawner.cs" t="Include" />

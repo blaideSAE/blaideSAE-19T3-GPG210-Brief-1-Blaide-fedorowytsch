@@ -6,6 +6,7 @@ public class BasicHold : StateBase
 {
     public GameObject target;
     //public Vector3 velocity;
+
     
     public AnimationCurve holdCurve;
     public GameObject heldObject;
@@ -53,15 +54,14 @@ public class BasicHold : StateBase
 
     public void HoldPosition()
     {
-        //heldObjectRB.AddForce(;
-        heldObjectRB.AddForce(Vector3.Normalize(target.transform.position - heldObject.transform.position) * holdCurve.Evaluate(distance) * heldObjectRB.mass) ;// (distance * holdingForce + holdingForce * Mathf.Log10(distance)));// *Time.deltaTime );
+        heldObjectRB.AddForce(Vector3.Normalize(target.transform.position - heldObject.transform.position) * holdCurve.Evaluate(distance) * heldObjectRB.mass) ;
     }
 
     private void Fire()
     {
         heldObjectRB.drag = oldDrag;
         heldObjectRB.useGravity = true;
-        heldStateManager.ChangeState(heldStateManager.currentState.nextState);
+       // heldStateManager.ChangeState(heldStateManager.currentState.nextState);
         sM.ChangeState(nextState);
     }
 
