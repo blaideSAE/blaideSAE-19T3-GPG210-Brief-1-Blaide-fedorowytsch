@@ -13,7 +13,6 @@ public class Spawner : MonoBehaviour , IGrabbable
     private MeshRenderer spawnMeshRenderer;
     private Material spawnMaterial;
     public float spawnAlpha;
-    public ForceGunMain lastGrabber;
     public int obstructions = 0;
     public List<GameObject> spawnedObjects;
     public GameObject lastSpawned;
@@ -49,11 +48,20 @@ public class Spawner : MonoBehaviour , IGrabbable
 
     void UpdateMesh()
     {
-        spawnCollider.sharedMesh = prefab.GetComponent<MeshFilter>().sharedMesh;
+        /*spawnCollider.sharedMesh = prefab.GetComponent<MeshFilter>().sharedMesh;
         spawnMeshFilter.mesh = prefab.GetComponent<MeshFilter>().sharedMesh;
         spawnMaterial.color = prefab.GetComponent<Renderer>().sharedMaterial.color;
         spawnMaterial.color = new Color(spawnMaterial.color.r,spawnMaterial.color.g,spawnMaterial.color.b,spawnAlpha);
-        transform.localScale = prefab.transform.localScale; //- new Vector3(0.04f, 0.04f, 0.1f);
+        transform.localScale = prefab.transform.localScale;*/
+        
+        ISpawnable spawnable = prefab.GetComponent<ISpawnable>();
+        spawnCollider.sharedMesh = spawnable.SpawnerMesh();
+        spawnMeshFilter.mesh = spawnable.SpawnerMesh();
+        spawnMaterial.color = spawnable.SpawnerMaterial().color;
+        spawnMaterial.color = new Color(spawnable.SpawnerMaterial().color.r,spawnable.SpawnerMaterial().color.g,spawnable.SpawnerMaterial().color.b,spawnAlpha);
+        transform.localScale = prefab.transform.localScale; 
+        
+        
     }
 
     
@@ -64,7 +72,9 @@ public class Spawner : MonoBehaviour , IGrabbable
             lastSpawned = Instantiate(prefab, transform.position, transform.rotation);
             Debug.Log("spawned" + lastSpawned.name);
             spawnedObjects.Add(lastSpawned);
+            lastSpawned.AddComponent<SpawnedObject>().parentSpawner = this;
             
+
         }
     }
 

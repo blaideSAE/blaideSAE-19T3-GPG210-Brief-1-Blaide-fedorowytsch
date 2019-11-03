@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlueBall : MonoBehaviour,IGrabbable
+public class GlueBall : MonoBehaviour,IGrabbable, IDestroyedByLava, ISpawnable
 {
     public GameObject parent;
     private Rigidbody pRB;
@@ -14,14 +14,12 @@ public class GlueBall : MonoBehaviour,IGrabbable
     private Rigidbody rB;
     
     public Joint mainJoint;
-    
-    public Joint selfJoint;
     public Vector3 attatchmentPoint;
-    
+
+    public GlueBall otherGlueBall;
+
     public float strength;
     public bool isHeld;
-    
-    // Start is called before the first frame update
     void Start()
     {
         rB = GetComponent<Rigidbody>();
@@ -29,15 +27,7 @@ public class GlueBall : MonoBehaviour,IGrabbable
        // selfJoint.enableCollision = false;
        // selfJoint.breakForce = strength;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-        
-    }
-
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<Rigidbody>() != null)
@@ -63,13 +53,13 @@ public class GlueBall : MonoBehaviour,IGrabbable
         if (other.gameObject == parent)
         {
             parent = null;
-            Destroy(mainJoint);
+            
         }
         else if (other.gameObject == child)
         {
-            parent = child;
+            //parent = child;
             child = null;
-            Destroy(mainJoint);
+            
         }
         
     }
@@ -82,42 +72,39 @@ public class GlueBall : MonoBehaviour,IGrabbable
         mainJoint.breakForce = strength;
     }
 
+    //public void OnMainJointBreak()
+    //{
+    //}
+
     public void AttatchGlue()
     {
         Physics.IgnoreCollision(this.GetComponent<Collider>(), parent.GetComponent<Collider>(), true);
-        //transform.position = parent.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
         transform.position = parent.GetComponent<Collider>().ClosestPoint(transform.position);
-
-        selfJoint = gameObject.AddComponent<FixedJoint>();
-        selfJoint.connectedBody = pRB;
-        selfJoint.enableCollision = false;
+        this.transform.SetParent(parent.transform);
         rB.useGravity = false;
+        rB.isKinematic = true;
     }
 
     public void DetatchGlue()
     {
-        if (parent != null)
-        { 
-            Physics.IgnoreCollision(this.GetComponent<Collider>(), parent.GetComponent<Collider>(), false);
-  
-        }
-
-        if (selfJoint != null)
+        Physics.IgnoreCollision(this.GetComponent<Collider>(), parent.GetComponent<Collider>(), false); 
+        this.transform.SetParent(null);
+        rB.isKinematic = false;
+        if (mainJoint != null)
         {
-            selfJoint.enableCollision = true;
-            Destroy(selfJoint);
+            Destroy(mainJoint);
         }
-
-        
-        //rB.useGravity = true;
     }
 
     public void Grabbed()
     { 
-        DetatchGlue();
+        if (parent != null)
+        { 
+            DetatchGlue();
+            
+        }
         isHeld = true;
     }
-
     public void Dropped()
     {
         if (parent != null)
@@ -126,7 +113,6 @@ public class GlueBall : MonoBehaviour,IGrabbable
         }
         isHeld = false;
     }
-
     public bool IsHeld()
     {
         return isHeld;
@@ -136,9 +122,17 @@ public class GlueBall : MonoBehaviour,IGrabbable
     {
         return GetComponent<Rigidbody>();
     }
-
     public GameObject HoldObject()
     {
         return gameObject;
     }
+    public Mesh SpawnerMesh()
+    {
+        return GetComponent<MeshFilter>().sharedMesh;
+    }
+    public Material SpawnerMaterial()
+    {
+        return GetComponent<Renderer>().sharedMaterial;
+    }
 }
+

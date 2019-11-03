@@ -65,6 +65,8 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="AnimateHover.cs" t="Include" />
+          <e p="BlockDestroyer.cs" t="Include" />
           <e p="BuildingBlock.cs" t="Include" />
           <e p="CameraControlFirstPerson.cs" t="Include" />
           <e p="Cube" t="Include">
@@ -76,7 +78,6 @@
               <e p="WeirdFloating.cs" t="Include" />
             </e>
           </e>
-          <e p="CubeSpawner.cs" t="Include" />
           <e p="ExtensionMethods.cs" t="Include" />
           <e p="ForceGun" t="Include">
             <e p="ForceGunMain.cs" t="Include" />
@@ -87,16 +88,23 @@
             </e>
           </e>
           <e p="GlueBall.cs" t="Include" />
+          <e p="GlueJoinBreakDetection.cs" t="Include" />
           <e p="GravClamp.cs" t="Include" />
-          <e p="IGrabbable.cs" t="Include" />
-          <e p="IGrabber.cs" t="Include" />
+          <e p="Interfaces" t="Include">
+            <e p="IDestroyable.cs" t="Include" />
+            <e p="IGlueable.cs" t="Include" />
+            <e p="IGrabbable.cs" t="Include" />
+            <e p="IGrabber.cs" t="Include" />
+            <e p="ISpawnable.cs" t="Include" />
+          </e>
           <e p="PlayerInteraction.cs" t="Include" />
           <e p="PlayerMovement.cs" t="Include" />
-          <e p="Spawner.cs" t="Include" />
+          <e p="Spawner" t="Include">
+            <e p="SpawnedObject.cs" t="Include" />
+            <e p="Spawner.cs" t="Include" />
+          </e>
           <e p="StateBase.cs" t="Include" />
           <e p="StateManager.cs" t="Include" />
-          <e p="Trigger.cs" t="Include" />
-          <e p="Triggerable.cs" t="Include" />
         </e>
         <e p="Shaders" t="Include">
           <e p="AlwaysOntop.shader" t="Include" />

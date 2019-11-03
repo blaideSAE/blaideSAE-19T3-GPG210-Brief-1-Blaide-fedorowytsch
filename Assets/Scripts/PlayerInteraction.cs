@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     public float maxDistance;
-    public Trigger currentFocused;
+   // public Trigger currentFocused;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +30,11 @@ public class PlayerInteraction : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask))
         {
             //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            if (hit.collider.gameObject.GetComponent<Trigger>() != null)
+            /*if (hit.collider.gameObject.GetComponent<Trigger>() != null)
             { 
                 currentFocused = hit.collider.gameObject.GetComponent<Trigger>();
                 currentFocused.OnTriggered();
-            }
+            }*/
         }
         
     }

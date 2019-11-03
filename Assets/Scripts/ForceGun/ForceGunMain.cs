@@ -94,16 +94,22 @@ public class ForceGunMain : MonoBehaviour, IGrabber<IGrabbable>
 
     private void HoldObject()
     {
+        
         distance = Vector3.Distance(target.transform.position, heldObject.transform.position);
         
         heldObjectRB.AddForce(Vector3.Normalize(target.transform.position - heldObject.transform.position) * holdCurve.Evaluate(distance) * heldObjectRB.mass * holdForceMultiplier) ;
         heldObjectRB.drag =  0.5f +   1/distance + newDrag * 1/Mathf.Pow(distance,2);
         
+        
+        // drop object;
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Drop(heldObject.GetComponent<IGrabbable>());
         }
 
+        
+        
+        // Move object in and out;
         if ( Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) >= 0.01f)
         {
             Vector3 targetNewPos = target.transform.position + (target.transform.position-this.transform.position).normalized  * Input.GetAxis("Mouse ScrollWheel") * 5;
@@ -111,8 +117,11 @@ public class ForceGunMain : MonoBehaviour, IGrabber<IGrabbable>
             {
                 target.transform.position += (target.transform.position-this.transform.position).normalized * Input.GetAxis("Mouse ScrollWheel") * 5;
             }
-
         }
+        
+        
+        
+        // Rotate
     }
 
     public void Grab(IGrabbable grabbable)
