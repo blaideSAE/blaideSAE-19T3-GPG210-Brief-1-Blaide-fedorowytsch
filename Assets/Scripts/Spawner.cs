@@ -15,7 +15,8 @@ public class Spawner : MonoBehaviour , IGrabbable
     public float spawnAlpha;
     public ForceGunMain lastGrabber;
     public int obstructions = 0;
-    public List<GameObject> spawnedObjects; 
+    public List<GameObject> spawnedObjects;
+    public GameObject lastSpawned;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,7 @@ public class Spawner : MonoBehaviour , IGrabbable
     public void Grabbed()
     {
         SpawnPrefab();
+        lastSpawned.GetComponent<IGrabbable>().Grabbed();
         
 
     }
@@ -51,7 +53,7 @@ public class Spawner : MonoBehaviour , IGrabbable
         spawnMeshFilter.mesh = prefab.GetComponent<MeshFilter>().sharedMesh;
         spawnMaterial.color = prefab.GetComponent<Renderer>().sharedMaterial.color;
         spawnMaterial.color = new Color(spawnMaterial.color.r,spawnMaterial.color.g,spawnMaterial.color.b,spawnAlpha);
-        transform.localScale = prefab.transform.localScale - new Vector3(0.04f, 0.04f, 0.1f);
+        transform.localScale = prefab.transform.localScale; //- new Vector3(0.04f, 0.04f, 0.1f);
     }
 
     
@@ -59,12 +61,21 @@ public class Spawner : MonoBehaviour , IGrabbable
     {
         if (obstructions == 0)
         {
-            GameObject newObject = Instantiate(prefab, transform.position, transform.rotation);
-            Debug.Log("spawned" + newObject.name);
-            spawnedObjects.Add(newObject);
-            //.currentFocused = newObject;
-           // .basicHold.heldObject = newObject;
+            lastSpawned = Instantiate(prefab, transform.position, transform.rotation);
+            Debug.Log("spawned" + lastSpawned.name);
+            spawnedObjects.Add(lastSpawned);
+            
         }
+    }
+
+    public Rigidbody HoldRigidBody()
+    {
+        return lastSpawned.GetComponent<Rigidbody>();
+    }
+
+    public GameObject HoldObject()
+    {
+        return lastSpawned;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -16,6 +16,7 @@ public class GlueBall : MonoBehaviour,IGrabbable
     public Joint mainJoint;
     
     public Joint selfJoint;
+    public Vector3 attatchmentPoint;
     
     public float strength;
     public bool isHeld;
@@ -41,7 +42,6 @@ public class GlueBall : MonoBehaviour,IGrabbable
     {
         if (other.gameObject.GetComponent<Rigidbody>() != null)
         {
-            Physics.IgnoreCollision(this.GetComponent<Collider>(), other, true);
             if (parent == null)
             { 
                 parent = other.gameObject;
@@ -59,7 +59,7 @@ public class GlueBall : MonoBehaviour,IGrabbable
     }
     private void OnTriggerExit(Collider other)
     {
-        Physics.IgnoreCollision(this.GetComponent<Collider>(), other, false);
+       // Physics.IgnoreCollision(this.GetComponent<Collider>(), other, false);
         if (other.gameObject == parent)
         {
             parent = null;
@@ -84,6 +84,10 @@ public class GlueBall : MonoBehaviour,IGrabbable
 
     public void AttatchGlue()
     {
+        Physics.IgnoreCollision(this.GetComponent<Collider>(), parent.GetComponent<Collider>(), true);
+        //transform.position = parent.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+        transform.position = parent.GetComponent<Collider>().ClosestPoint(transform.position);
+
         selfJoint = gameObject.AddComponent<FixedJoint>();
         selfJoint.connectedBody = pRB;
         selfJoint.enableCollision = false;
@@ -92,8 +96,20 @@ public class GlueBall : MonoBehaviour,IGrabbable
 
     public void DetatchGlue()
     {
-        Destroy(selfJoint);
-        rB.useGravity = true;
+        if (parent != null)
+        { 
+            Physics.IgnoreCollision(this.GetComponent<Collider>(), parent.GetComponent<Collider>(), false);
+  
+        }
+
+        if (selfJoint != null)
+        {
+            selfJoint.enableCollision = true;
+            Destroy(selfJoint);
+        }
+
+        
+        //rB.useGravity = true;
     }
 
     public void Grabbed()
@@ -115,5 +131,14 @@ public class GlueBall : MonoBehaviour,IGrabbable
     {
         return isHeld;
 
+    }
+    public Rigidbody HoldRigidBody()
+    {
+        return GetComponent<Rigidbody>();
+    }
+
+    public GameObject HoldObject()
+    {
+        return gameObject;
     }
 }

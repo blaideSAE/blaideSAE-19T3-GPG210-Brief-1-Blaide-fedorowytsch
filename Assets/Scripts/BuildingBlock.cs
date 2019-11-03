@@ -26,6 +26,16 @@ public class BuildingBlock : MonoBehaviour , IGrabbable
         return isHeld;
     }
 
+    public Rigidbody HoldRigidBody()
+    {
+        return GetComponent<Rigidbody>();
+    }
+
+    public GameObject HoldObject()
+    {
+        return gameObject;
+    }
+
     // Update is called once per frame
     void Update()
     {

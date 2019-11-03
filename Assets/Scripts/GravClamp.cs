@@ -35,6 +35,10 @@ public class GravClamp : MonoBehaviour , IGrabber<IGrabbable>
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.gameObject.GetComponent<IGrabbable>() != null && other.gameObject.GetComponent<IGrabbable>().IsHeld() != true)
+        {
+            Drop(other.gameObject.GetComponent<IGrabbable>());
+        }
 
         objectsInField.Remove(other.gameObject);
     }

@@ -49,11 +49,10 @@ public class ForceGunMain : MonoBehaviour, IGrabber<IGrabbable>
         
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask))
         {
+
             //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            // if (hit.collider.gameObject.GetComponent<Outline>() != null)
-            // {
-            currentFocused = hit.collider.gameObject;  
-            // }
+
+            currentFocused = hit.collider.gameObject;
         }
         else
         {
@@ -69,7 +68,7 @@ public class ForceGunMain : MonoBehaviour, IGrabber<IGrabbable>
             
         }
         
-        if (Input.GetKeyDown(KeyCode.Mouse0) && (currentFocused.GetComponent<IGrabbable>() != null))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && currentFocused != null && (currentFocused.GetComponent<IGrabbable>() != null))
         {
             Grab(currentFocused.GetComponent<IGrabbable>());
         }
@@ -119,27 +118,17 @@ public class ForceGunMain : MonoBehaviour, IGrabber<IGrabbable>
     public void Grab(IGrabbable grabbable)
     {
         grabbable.Grabbed();
-        if (currentFocused.GetComponent<Rigidbody>() != null)
+        if ( grabbable.HoldRigidBody() != null)
         {
-            heldObject = currentFocused.gameObject;
-            heldObjectRB = heldObject.GetComponent<Rigidbody>(); 
+            heldObject = grabbable.HoldObject();
+            currentFocused = heldObject;
+            heldObjectRB = grabbable.HoldRigidBody(); 
             oldDrag = heldObjectRB.drag;
             target.transform.rotation = heldObject.transform.rotation;
             target.transform.position = heldObject.transform.position;
             heldObjectRB.useGravity = false;
             objectHeld = true;
         }
-
-       
-        
-        
-        
-        
-
-        
-        
-        
-        
     }
 
     public void Drop(IGrabbable grabbable)
