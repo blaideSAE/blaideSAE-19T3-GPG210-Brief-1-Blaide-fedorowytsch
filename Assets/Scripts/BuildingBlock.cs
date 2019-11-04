@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingBlock : MonoBehaviour , IGrabbable, IDestroyedByLava, ISpawnable, IGlueable
+public class BuildingBlock : MonoBehaviour , IGrabbable, IDestroyedByLava, ISpawnable
 {
     private bool isHeld;
     public void Grabbed()

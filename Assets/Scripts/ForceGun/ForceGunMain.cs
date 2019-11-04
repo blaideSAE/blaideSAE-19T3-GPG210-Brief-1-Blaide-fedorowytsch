@@ -106,6 +106,8 @@ public class ForceGunMain : MonoBehaviour, IGrabber<IGrabbable>
         
         Vector3 deltaPosition = target.transform.position - heldObject.transform.position;
         heldObjectRB.drag =  0.5f +   1/distance + newDrag * 1/Mathf.Pow(distance,2);
+
+
         if (holdByCentre)
         {
             heldObjectRB.AddForce(deltaPosition.normalized * holdCurve.Evaluate(distance) * heldObjectRB.mass * holdForceMultiplier);
@@ -158,7 +160,6 @@ public class ForceGunMain : MonoBehaviour, IGrabber<IGrabbable>
 
             differenceInRotation = Quaternion.Angle(target.transform.rotation,heldObject.transform.rotation);
            
-            heldObjectRB.angularDrag = 10*(1/holdCurve.Evaluate(differenceInRotation));
 
             
             //This drops a component of the Quaternion, it's stable but it has edge cases where the rotation is weird.

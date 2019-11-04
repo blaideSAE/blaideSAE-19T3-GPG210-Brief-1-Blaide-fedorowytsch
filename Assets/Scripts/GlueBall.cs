@@ -10,24 +10,48 @@ public class GlueBall : MonoBehaviour,IGrabbable, IDestroyedByLava, ISpawnable
     
     public GameObject child;
     private Rigidbody cRB;
-
+    
+    public GlueBall otherGlueBall;
     private Rigidbody rB;
     
-    public Joint mainJoint;
+    public FixedJoint mainJoint;
     public Vector3 attatchmentPoint;
 
-    public GlueBall otherGlueBall;
+    
 
     public float strength;
     public bool isHeld;
     void Start()
     {
         rB = GetComponent<Rigidbody>();
-        //selfJoint = gameObject.AddComponent<FixedJoint>();
-       // selfJoint.enableCollision = false;
-       // selfJoint.breakForce = strength;
     }
-    
+
+    private void Update()
+    {
+        if (otherGlueBall != null && otherGlueBall.parent != null && parent != null && mainJoint == null)
+        {
+            
+            child = otherGlueBall.parent;
+            cRB = child.GetComponent<Rigidbody>();
+
+
+            Vector3 deltaPosition = (otherGlueBall.transform.position - transform.position);
+            float distance = Vector3.Distance(transform.position, otherGlueBall.transform.position);
+            
+            pRB.AddForceAtPosition( deltaPosition * (1f/distance) * 20f,transform.position);
+            
+            
+            
+            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), child.GetComponent<Collider>(), true);
+           
+            
+            if ( distance < 0.02f)
+            {
+                Join();
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<Rigidbody>() != null)
@@ -39,11 +63,9 @@ public class GlueBall : MonoBehaviour,IGrabbable, IDestroyedByLava, ISpawnable
                 
                 
             }
-            else if (child == null && other.gameObject != parent)
+            else if (otherGlueBall == null && other.gameObject.GetComponent<GlueBall>()!= null)
             {
-                child = other.gameObject;
-                cRB = child.GetComponent<Rigidbody>();
-                Join();
+                otherGlueBall = other.gameObject.GetComponent<GlueBall>();
             }
         }
     }
@@ -55,11 +77,9 @@ public class GlueBall : MonoBehaviour,IGrabbable, IDestroyedByLava, ISpawnable
             parent = null;
             
         }
-        else if (other.gameObject == child)
+        else if (other.GetComponent<GlueBall>() == otherGlueBall)
         {
-            //parent = child;
-            child = null;
-            
+            otherGlueBall = null;
         }
         
     }

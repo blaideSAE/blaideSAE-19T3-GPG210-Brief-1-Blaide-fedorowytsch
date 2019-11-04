@@ -23,17 +23,13 @@ public class Spawner : MonoBehaviour , IGrabbable
         spawnMeshFilter = GetComponent<MeshFilter>();
         spawnMeshRenderer = GetComponent<MeshRenderer>();
         spawnMaterial = GetComponent<Renderer>().material;
-        
         UpdateMesh();
-        
     }
 
     public void Grabbed()
     {
         SpawnPrefab();
         lastSpawned.GetComponent<IGrabbable>().Grabbed();
-        
-
     }
 
     public void Dropped()
@@ -48,20 +44,12 @@ public class Spawner : MonoBehaviour , IGrabbable
 
     void UpdateMesh()
     {
-        /*spawnCollider.sharedMesh = prefab.GetComponent<MeshFilter>().sharedMesh;
-        spawnMeshFilter.mesh = prefab.GetComponent<MeshFilter>().sharedMesh;
-        spawnMaterial.color = prefab.GetComponent<Renderer>().sharedMaterial.color;
-        spawnMaterial.color = new Color(spawnMaterial.color.r,spawnMaterial.color.g,spawnMaterial.color.b,spawnAlpha);
-        transform.localScale = prefab.transform.localScale;*/
-        
         ISpawnable spawnable = prefab.GetComponent<ISpawnable>();
         spawnCollider.sharedMesh = spawnable.SpawnerMesh();
         spawnMeshFilter.mesh = spawnable.SpawnerMesh();
         spawnMaterial.color = spawnable.SpawnerMaterial().color;
         spawnMaterial.color = new Color(spawnable.SpawnerMaterial().color.r,spawnable.SpawnerMaterial().color.g,spawnable.SpawnerMaterial().color.b,spawnAlpha);
-        transform.localScale = prefab.transform.localScale; 
-        
-        
+        transform.localScale = prefab.transform.localScale;
     }
 
     
@@ -73,8 +61,6 @@ public class Spawner : MonoBehaviour , IGrabbable
             Debug.Log("spawned" + lastSpawned.name);
             spawnedObjects.Add(lastSpawned);
             lastSpawned.AddComponent<SpawnedObject>().parentSpawner = this;
-            
-
         }
     }
 

@@ -22636,10 +22636,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  holdForceMultiplier: 3
+  holdForceMultiplier: 10
   heldObject: {fileID: 0}
   holdByCentre: 1
-  newDrag: 8
+  newDrag: 30
   differenceInRotation: 0
   objectHeld: 0
   rotateKey: 304

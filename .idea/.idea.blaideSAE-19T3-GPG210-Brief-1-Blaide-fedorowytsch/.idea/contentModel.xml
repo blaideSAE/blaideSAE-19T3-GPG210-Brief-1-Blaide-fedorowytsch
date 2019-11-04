@@ -92,7 +92,6 @@
           <e p="GravClamp.cs" t="Include" />
           <e p="Interfaces" t="Include">
             <e p="IDestroyable.cs" t="Include" />
-            <e p="IGlueable.cs" t="Include" />
             <e p="IGrabbable.cs" t="Include" />
             <e p="IGrabber.cs" t="Include" />
             <e p="ISpawnable.cs" t="Include" />
