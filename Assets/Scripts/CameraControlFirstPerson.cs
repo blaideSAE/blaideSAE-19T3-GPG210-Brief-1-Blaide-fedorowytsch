@@ -16,6 +16,8 @@ public class CameraControlFirstPerson : MonoBehaviour
     private Vector3 targetAngle;
 
     private Transform standInRotor;
+
+    public bool rotationEnabled = true;
     
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,7 @@ public class CameraControlFirstPerson : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ( Application.isFocused)
+        if ( Application.isFocused && rotationEnabled)
         {
             RotateCamera();
         }
