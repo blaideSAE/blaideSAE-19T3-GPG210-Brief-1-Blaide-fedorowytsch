@@ -28,6 +28,7 @@ public class ForceGunMain : MonoBehaviour, IGrabber<IGrabbable>
     public KeyCode rotateKey;
     private LineRenderer lineRenderer;
     public Transform muzzle;
+    public LayerMask layerMask;
 
     private void Start()
     {
@@ -48,8 +49,8 @@ public class ForceGunMain : MonoBehaviour, IGrabber<IGrabbable>
 
     private void CheckForGrabbables()
     {
-        int layerMask = 1 << 2;
-        layerMask = ~layerMask;
+        //int layerMask = 1 << 2;
+        //layerMask = ~layerMask;
         RaycastHit hit;
         
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask))
